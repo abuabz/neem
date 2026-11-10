@@ -174,8 +174,8 @@ export const FAQS = [
 
 export const TESTIMONIALS = [
   {
-    name: "Ameen K.",
-    location: "Kochi, Kerala",
+    name: "Varis AK",
+    location: "Vengara, Kerala",
     review: "Fits into my Honda City cup holder like a glove. Looks super premium with the black and gold leaf design.",
     rating: 5,
   },
