@@ -174,6 +174,12 @@ export const FAQS = [
 
 export const TESTIMONIALS = [
   {
+    name: "Dr. Shifa",
+    location: "Calicut, Kerala",
+    review: "Much softer than regular supermarket tissues and doesn't leave any lint on glasses or face. Truly gentle on skin.",
+    rating: 5,
+  },
+  {
     name: "Varis AK",
     location: "Vengara, Kerala",
     review: "Fits into my Honda City cup holder like a glove. Looks super premium with the black and gold leaf design.",
