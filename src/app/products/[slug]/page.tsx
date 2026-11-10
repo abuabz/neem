@@ -153,7 +153,10 @@ export default function ProductDetailPage({
         <div
           style={{
             position: "relative",
-            aspectRatio: "4/3",
+            aspectRatio: "3/4",
+            maxWidth: "520px",
+            width: "100%",
+            margin: "0 auto",
             borderRadius: "20px",
             overflow: "hidden",
             border: "1px solid rgba(200,149,89,0.35)",

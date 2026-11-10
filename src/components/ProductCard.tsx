@@ -23,14 +23,22 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         aria-label={`View details for ${product.name}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <div style={{ position: "relative", width: "100%", aspectRatio: "4/3", overflow: "hidden" }}>
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            aspectRatio: "3/4",
+            overflow: "hidden",
+            background: "#140e0a",
+          }}
+        >
           <Image
             src={product.image}
             alt={`${product.name} - Neem Premium Face Tissue Bottle`}
             fill
             sizes="(max-width: 760px) 50vw, 25vw"
             priority={priority}
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "center" }}
           />
         </div>
       </Link>
