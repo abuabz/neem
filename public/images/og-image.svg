@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="g1" cx="85%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="#c89559" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0c0907" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0907"/>
+      <stop offset="60%" stop-color="#18110c"/>
+      <stop offset="100%" stop-color="#0d0907"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+  <rect x="40" y="40" width="1120" height="550" rx="24" fill="none" stroke="#c89559" stroke-opacity="0.35" stroke-width="2"/>
+  <g transform="translate(100, 100)">
+    <text x="0" y="30" fill="#c89559" font-family="sans-serif" font-size="24" font-weight="600" letter-spacing="4">SOFTNESS THAT CARES • NATURE THAT PROTECTS</text>
+    <text x="0" y="140" fill="#f7efe4" font-family="sans-serif" font-size="92" font-weight="800">NEEM</text>
+    <text x="0" y="220" fill="#c89559" font-family="sans-serif" font-size="48" font-weight="700">Premium Face Tissue</text>
+    <text x="0" y="290" fill="#c7b8a5" font-family="sans-serif" font-size="26" font-weight="400">Ultra soft, strong and compact face tissue bottles for cars, desk &amp; travel.</text>
+    <text x="0" y="335" fill="#c7b8a5" font-family="sans-serif" font-size="24" font-weight="400">60 pulls • 120 sheets • Crafted in Vengara, Kerala • Starting at ₹99</text>
+  </g>
+</svg>

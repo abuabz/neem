@@ -1,0 +1,41 @@
+export const siteConfig = {
+  name: "Neem",
+  fullName: "Neem | Premium Face Tissue",
+  tagline: "Softness that cares, nature that protects.",
+  description:
+    "Neem premium face tissue: ultra soft, strong and compact, in a stylish bottle you can carry anywhere. Designed for car cup holders, homes, and offices. Based in Vengara, Kerala.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://neemtissue.in",
+  phone: process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "918943019251",
+  displayPhone: "8943019251",
+  formattedPhone: "+91 8943019251",
+  instagram: "https://www.instagram.com/neem_tissue/",
+  instagramHandle: "@neem_tissue",
+  email: "contact@neemtissue.com",
+  location: {
+    city: "Vengara",
+    state: "Kerala",
+    country: "India",
+    addressLocality: "Vengara",
+    addressRegion: "Kerala",
+    addressCountry: "IN",
+  },
+  ogImage: "/images/og-image.png",
+  keywords: [
+    "Neem face tissue",
+    "premium face tissue bottle",
+    "car tissue cylinder",
+    "car cup holder tissue",
+    "ultra soft face tissue",
+    "hygienic facial tissue Kerala",
+    "Neem tissue Vengara",
+    "compact tissue bottle",
+    "eco friendly face tissue India",
+    "face tissue refill pack",
+    "buy tissue bottle online",
+  ],
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    bing: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION || "",
+  },
+};
+
