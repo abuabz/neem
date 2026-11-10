@@ -25,7 +25,7 @@ export const metadata = {
     url: siteConfig.url,
     images: [
       {
-        url: `${siteConfig.url}/images/hero-bg.jpg`,
+        url: `${siteConfig.url}/images/oneproduct.jpeg`,
         width: 768,
         height: 1024,
         alt: "Neem Premium Face Tissue Bottle in Nature - Just ₹99",

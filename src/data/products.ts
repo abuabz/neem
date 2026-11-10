@@ -31,9 +31,9 @@ export const PRODUCTS: Product[] = [
     shortDesc: "1 premium tissue bottle",
     fullDesc:
       "The signature Neem single cylinder face tissue bottle. Contains 60 pulls (120 sheets of 2-ply ultra-soft tissue). Crafted with signature copper and black leaf packaging that looks stunning on car cup holders, office desks, dining tables, and vanity counters.",
-    image: "/images/product-poster.jpg",
-    imageWidth: 768,
-    imageHeight: 1024,
+    image: "/images/oneproduct.jpeg",
+    imageWidth: 1200,
+    imageHeight: 1600,
     tag: undefined,
     features: [
       "60 pulls / 120 2-ply ultra soft sheets",
@@ -59,9 +59,9 @@ export const PRODUCTS: Product[] = [
     shortDesc: "2 bottles",
     fullDesc:
       "Two premium Neem face tissue cylinders. Keep one inside your car and one on your workstation or living room table. Experience daily luxury, hygiene, and instant access to soft tissues wherever you go.",
-    image: "/images/product-duo.jpeg",
-    imageWidth: 403,
-    imageHeight: 268,
+    image: "/images/twocombo.jpeg",
+    imageWidth: 1086,
+    imageHeight: 1448,
     tag: "Popular",
     features: [
       "2 Bottles (120 pulls / 240 sheets total)",
@@ -87,9 +87,9 @@ export const PRODUCTS: Product[] = [
     shortDesc: "1 bottle and 1 refill pack",
     fullDesc:
       "The eco-conscious choice: 1 reusable designer tissue bottle plus 1 soft tissue refill pack. Once you finish your initial cylinder, reload it easily while reducing container waste and saving money.",
-    image: "/images/product-refill.jpeg",
-    imageWidth: 403,
-    imageHeight: 318,
+    image: "/images/bottleandrefile.jpeg",
+    imageWidth: 1200,
+    imageHeight: 1600,
     tag: "Eco Choice",
     features: [
       "1 reusable designer bottle + 1 refill bundle",
@@ -115,9 +115,9 @@ export const PRODUCTS: Product[] = [
     shortDesc: "4 bottles, free delivery",
     fullDesc:
       "The ultimate value set! 4 premium face tissue bottles with complimentary free doorstep delivery. Equip every car in the family, the office conference room, and home living spaces with pristine Neem tissues.",
-    image: "/images/product-combo4.jpeg",
-    imageWidth: 405,
-    imageHeight: 308,
+    image: "/images/fourcombo.jpeg",
+    imageWidth: 1086,
+    imageHeight: 1448,
     tag: "Free delivery",
     features: [
       "4 Full bottles (240 pulls / 480 sheets total)",

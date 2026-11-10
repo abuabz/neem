@@ -52,7 +52,7 @@ export default function HomeHero() {
         >
           <Image
             className="hbg"
-            src="/images/hero-bg.jpg"
+            src="/images/oneproduct.jpeg"
             alt="Neem Premium Face Tissue Bottle in Nature - Just ₹99"
             width={390}
             height={520}
@@ -111,7 +111,7 @@ export default function HomeHero() {
       <section className="feat rv" aria-labelledby="feat-heading">
         <div style={{ position: "relative", width: "100%", maxWidth: "440px", margin: "0 auto", aspectRatio: "4/5" }}>
           <Image
-            src="/images/hero-bg.jpg"
+            src="/images/oneproduct.jpeg"
             alt="Neem Bottle Arch Feature"
             fill
             sizes="(max-width: 900px) 300px, 440px"
