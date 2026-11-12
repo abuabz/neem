@@ -145,7 +145,7 @@ export default function WholesalePage() {
             </li>
             <li style={{ padding: "8px 0 8px 24px", position: "relative", color: "var(--cream)" }}>
               <span style={{ position: "absolute", left: 0, color: "var(--coffee)", fontWeight: 700 }}>✓</span>
-              Reliable doorstep delivery and freight handling across Kerala and all Indian states
+              Reliable delivery and freight handling across Kerala and all Indian states
             </li>
             <li style={{ padding: "8px 0 8px 24px", position: "relative", color: "var(--cream)" }}>
               <span style={{ position: "absolute", left: 0, color: "var(--coffee)", fontWeight: 700 }}>✓</span>

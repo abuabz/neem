@@ -6,6 +6,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import JsonLd from "@/components/JsonLd";
 import CopyMobileButton from "@/components/CopyMobileButton";
 import HomeHero from "@/components/HomeHero";
+import RefillVideo from "@/components/RefillVideo";
 import { PRODUCTS, FAQS, TESTIMONIALS } from "@/data/products";
 import { siteConfig } from "@/lib/siteConfig";
 
@@ -128,6 +129,9 @@ export default function HomePage() {
           </Link>
         </p>
       </section>
+
+      {/* HOW TO REFILL VIDEO SECTION */}
+      <RefillVideo />
 
       {/* ABOUT Section from neem.html */}
       <section id="about" style={{ marginTop: "clamp(36px, 5vw, 56px)" }} aria-labelledby="story-title">

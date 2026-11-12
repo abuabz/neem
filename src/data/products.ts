@@ -18,6 +18,10 @@ export interface Product {
   sheets: number;
   ratingValue: number;
   reviewCount: number;
+  qrImage: string;
+  deliveryFee: number;
+  totalWithDelivery: number;
+  upiUrl: string;
 }
 
 export const PRODUCTS: Product[] = [
@@ -48,6 +52,11 @@ export const PRODUCTS: Product[] = [
     sheets: 120,
     ratingValue: 4.9,
     reviewCount: 142,
+    qrImage: "/images/129scanner.jpeg",
+    deliveryFee: 30,
+    totalWithDelivery: 129,
+    upiUrl:
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=129.00&cu=INR&aid=uGICAgNDjk8-FAw",
   },
   {
     id: "duo",
@@ -76,6 +85,11 @@ export const PRODUCTS: Product[] = [
     sheets: 240,
     ratingValue: 4.9,
     reviewCount: 98,
+    qrImage: "/images/219scanner.jpeg",
+    deliveryFee: 30,
+    totalWithDelivery: 219,
+    upiUrl:
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=219.00&cu=INR&aid=uGICAgNDjk8-FAw",
   },
   {
     id: "refill",
@@ -104,6 +118,11 @@ export const PRODUCTS: Product[] = [
     sheets: 240,
     ratingValue: 5.0,
     reviewCount: 76,
+    qrImage: "/images/179scanner.jpeg",
+    deliveryFee: 30,
+    totalWithDelivery: 179,
+    upiUrl:
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=179.00&cu=INR&aid=uGICAgNDjk8-FAw",
   },
   {
     id: "combo4",
@@ -114,14 +133,14 @@ export const PRODUCTS: Product[] = [
     currency: "INR",
     shortDesc: "4 bottles, free delivery",
     fullDesc:
-      "The ultimate value set! 4 premium face tissue bottles with complimentary free doorstep delivery. Equip every car in the family, the office conference room, and home living spaces with pristine Neem tissues.",
+      "The ultimate value set! 4 premium face tissue bottles with complimentary free delivery. Equip every car in the family, the office conference room, and home living spaces with pristine Neem tissues.",
     image: "/images/fourcombo.jpeg",
     imageWidth: 1086,
     imageHeight: 1448,
     tag: "Free delivery",
     features: [
       "4 Full bottles (240 pulls / 480 sheets total)",
-      "100% Free doorstep delivery across Kerala & India",
+      "100% Free delivery across Kerala",
       "Maximum value per sheet",
       "Perfect gift for car owners and modern homes",
       "Long-lasting premium stock",
@@ -132,6 +151,11 @@ export const PRODUCTS: Product[] = [
     sheets: 480,
     ratingValue: 5.0,
     reviewCount: 215,
+    qrImage: "/images/389scanner.jpeg",
+    deliveryFee: 0,
+    totalWithDelivery: 389,
+    upiUrl:
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=389.00&cu=INR&aid=uGICAgNDjk8-FAw",
   },
 ];
 

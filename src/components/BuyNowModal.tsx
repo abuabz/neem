@@ -157,7 +157,25 @@ export default function BuyNowModal() {
   const isFreeDelivery = selectedProduct.id === "combo4" || selectedProduct.price === 389;
   const deliveryCharge = isFreeDelivery ? 0 : STANDARD_DELIVERY_CHARGE;
   const grandTotal = itemSubtotal + deliveryCharge;
-  const isSingleProduct = selectedProduct.id === "single" || selectedProduct.slug === "single-bottle";
+
+  // Active QR code image and UPI link based on the selected product
+  const activeQrImage =
+    quantity === 1 && selectedProduct.qrImage
+      ? selectedProduct.qrImage
+      : selectedProduct.id === "single"
+      ? "/images/129scanner.jpeg"
+      : selectedProduct.id === "duo"
+      ? "/images/219scanner.jpeg"
+      : selectedProduct.id === "refill"
+      ? "/images/179scanner.jpeg"
+      : selectedProduct.id === "combo4"
+      ? "/images/389scanner.jpeg"
+      : "/images/129scanner.jpeg";
+
+  const activeUpiUrl =
+    quantity === 1 && selectedProduct.upiUrl
+      ? selectedProduct.upiUrl
+      : `upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=${grandTotal}.00&cu=INR`;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -412,70 +430,92 @@ export default function BuyNowModal() {
           </div>
         </div>
 
-        {/* Single Product UPI QR Code Payment Box (No Transaction ID field) */}
-        {isSingleProduct && (
+        {/* UPI QR Code Payment Box for Every Product */}
+        <div
+          style={{
+            padding: "16px",
+            margin: "12px 0 16px",
+            borderRadius: "14px",
+            border: "1px solid rgba(200, 149, 89, 0.4)",
+            background: "rgba(0, 0, 0, 0.5)",
+            textAlign: "center",
+          }}
+        >
           <div
             style={{
-              padding: "16px",
-              margin: "12px 0 16px",
-              borderRadius: "14px",
-              border: "1px solid rgba(200, 149, 89, 0.4)",
-              background: "rgba(0, 0, 0, 0.5)",
-              textAlign: "center",
+              fontSize: "0.8rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              color: "var(--coffee)",
+              fontWeight: 700,
+              marginBottom: "4px",
             }}
           >
-            <div
-              style={{
-                fontSize: "0.8rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.15em",
-                color: "var(--coffee)",
-                fontWeight: 700,
-                marginBottom: "4px",
-              }}
-            >
-              Pay via Google Pay / UPI QR
-            </div>
-            <p style={{ margin: "0 auto 12px", fontSize: "0.86rem", color: "var(--cream)", maxWidth: "42ch" }}>
-              Scan this QR code using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong> to pay <strong>₹{grandTotal}</strong> (₹{itemSubtotal} + ₹{deliveryCharge} delivery).
-            </p>
-
-            <div
-              style={{
-                display: "inline-block",
-                padding: "10px",
-                background: "#ffffff",
-                borderRadius: "12px",
-                boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6)",
-              }}
-            >
-              <Image
-                src="/images/qr-code.jpg"
-                alt="Neem Google Pay UPI QR Code"
-                width={170}
-                height={170}
-                priority
-                style={{ display: "block", borderRadius: "8px" }}
-              />
-            </div>
-
-            {/* Copy Mobile Number for GPay / UPI */}
-            <div
-              style={{
-                marginTop: "14px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "6px",
-              }}
-            >
-              <span style={{ fontSize: "0.82rem", color: "var(--mut)" }}>
-                Or pay directly using Google Pay / PhonePe Mobile Number:
-              </span>
-              <CopyMobileButton phone="8943019251" layout="badge" size="md" />
-            </div>
+            Pay via Google Pay / UPI QR
           </div>
-        )}
+          <p style={{ margin: "0 auto 12px", fontSize: "0.86rem", color: "var(--cream)", maxWidth: "44ch" }}>
+            Scan this QR code using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong> to pay{" "}
+            <strong style={{ color: "var(--coffee)", fontSize: "1rem" }}>₹{grandTotal}</strong>{" "}
+            {deliveryCharge === 0 ? (
+              "(Free Delivery)"
+            ) : (
+              <>(₹{itemSubtotal} + ₹{deliveryCharge} delivery)</>
+            )}
+            .
+          </p>
+
+          <a
+            href={activeUpiUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Pay ₹${grandTotal} for ${selectedProduct.name} with Google Pay or UPI`}
+            style={{
+              display: "inline-block",
+              padding: "10px",
+              background: "#ffffff",
+              borderRadius: "12px",
+              boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6)",
+              textDecoration: "none",
+            }}
+          >
+            <Image
+              src={activeQrImage}
+              alt={`Neem ${selectedProduct.name} Google Pay UPI QR Code - ₹${grandTotal}`}
+              width={170}
+              height={170}
+              priority
+              style={{ display: "block", borderRadius: "8px" }}
+            />
+          </a>
+
+          {/* Copy Mobile Number & Tap to Pay for GPay / UPI */}
+          <div
+            style={{
+              marginTop: "14px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <span style={{ fontSize: "0.82rem", color: "var(--mut)" }}>
+              Or pay directly using Google Pay / PhonePe Mobile Number:
+            </span>
+            <CopyMobileButton phone="8943019251" layout="badge" size="md" />
+            <a
+              href={activeUpiUrl}
+              style={{
+                fontSize: "0.82rem",
+                color: "var(--coffee)",
+                textDecoration: "underline",
+                fontWeight: 600,
+                marginTop: "2px",
+              }}
+            >
+              Tap here to Pay ₹{grandTotal} on Mobile &rarr;
+            </a>
+          </div>
+        </div>
 
         {/* Delivery Details Form */}
         <form onSubmit={handleSubmit} style={{ display: "grid", gap: "10px" }}>

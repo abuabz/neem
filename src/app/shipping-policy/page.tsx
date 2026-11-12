@@ -63,7 +63,7 @@ export default function ShippingPolicyPage() {
               1. Delivery Timelines
             </h2>
             <p style={{ margin: "0 0 8px" }}>
-              • <strong>Kerala Deliveries:</strong> Typically delivered within <strong>2 to 4 business days</strong>.
+              • <strong>Kerala Deliveries:</strong> Typically delivered within <strong>2 to 5 Working days</strong>.
             </p>
             <p style={{ margin: "0 0 8px" }}>
               • <strong>Rest of South India (Karnataka, Tamil Nadu, Andhra Pradesh, Telangana):</strong> <strong>3 to 5 business days</strong>.
@@ -78,7 +78,7 @@ export default function ShippingPolicyPage() {
               2. Shipping Charges
             </h2>
             <p style={{ margin: "0 0 8px" }}>
-              • <strong>4 Bottle Combo (₹389):</strong> <strong>100% Free Doorstep Delivery</strong> anywhere across Kerala and India. Zero delivery fee.
+              • <strong>4 Bottle Combo (₹389):</strong> <strong>100% Free Delivery</strong> anywhere across Kerala. Zero delivery fee.
             </p>
             <p style={{ margin: 0 }}>
               • <strong>Single, Duo &amp; Refill Packs:</strong> Flat delivery charge of just <strong>₹30</strong> per order.

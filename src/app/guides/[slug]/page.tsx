@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { GUIDES, getGuideBySlug } from "@/data/guides";
 import { siteConfig } from "@/lib/siteConfig";
 import JsonLd from "@/components/JsonLd";
+import RefillVideo from "@/components/RefillVideo";
 
 export function generateStaticParams() {
   return GUIDES.map((guide) => ({
@@ -180,6 +181,13 @@ export default function GuideDetailPage({
           </p>
         </header>
 
+        {/* Featured Video Tutorial for Refill Guide */}
+        {guide.slug === "how-to-refill-neem-face-tissue-bottle" && (
+          <div style={{ marginBottom: "36px" }}>
+            <RefillVideo title="Watch the 30-Second Video Tutorial" />
+          </div>
+        )}
+
         {/* Article Body */}
         <div style={{ display: "grid", gap: "28px" }}>
           {guide.sections.map((sec, idx) => (
@@ -241,7 +249,7 @@ export default function GuideDetailPage({
               Get the Neem 4-Bottle Value Pack
             </strong>
             <span style={{ color: "var(--mut)", fontSize: "0.9rem" }}>
-              4 premium cylinder bottles at ₹389 with Free Doorstep Delivery. Fits all automotive cup holders.
+              4 premium cylinder bottles at ₹389 with Free Delivery. Fits all automotive cup holders.
             </span>
           </div>
           <Link href="/products/4-bottle-combo" className="btn">

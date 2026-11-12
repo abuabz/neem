@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { PRODUCTS, getProductBySlug } from "@/data/products";
 import { siteConfig } from "@/lib/siteConfig";
 import JsonLd from "@/components/JsonLd";
+import RefillVideo from "@/components/RefillVideo";
 import AddToCartDetailButton from "./AddToCartDetailButton";
 import CopyMobileButton from "@/components/CopyMobileButton";
 
@@ -150,22 +151,7 @@ export default function ProductDetailPage({
         }}
       >
         {/* Product Image Tile */}
-        <div
-          style={{
-            position: "relative",
-            aspectRatio: "3/4",
-            maxWidth: "520px",
-            width: "100%",
-            margin: "0 auto",
-            borderRadius: "20px",
-            overflow: "hidden",
-            border: "1px solid rgba(200,149,89,0.35)",
-            background: "radial-gradient(circle at 50% 35%, #352115, #140e0a)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div className="pdp-img-tile">
           {product.tag && <span className="tag">{product.tag}</span>}
           <Image
             src={product.image}
@@ -251,53 +237,101 @@ export default function ProductDetailPage({
 
           <AddToCartDetailButton product={product} />
 
-          {product.id === "single" && (
-            <div
+          {/* Quick Pay QR Code Badge for Every Product */}
+          <div
+            style={{
+              marginTop: "24px",
+              padding: "16px 20px",
+              borderRadius: "14px",
+              border: "1px solid rgba(200, 149, 89, 0.35)",
+              background: "rgba(0, 0, 0, 0.45)",
+              display: "flex",
+              alignItems: "center",
+              gap: "18px",
+              flexWrap: "wrap",
+            }}
+          >
+            <a
+              href={product.upiUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Pay ₹${product.totalWithDelivery} for ${product.name} with Google Pay or UPI`}
               style={{
-                marginTop: "24px",
-                padding: "16px 20px",
-                borderRadius: "14px",
-                border: "1px solid rgba(200, 149, 89, 0.35)",
-                background: "rgba(0, 0, 0, 0.45)",
-                display: "flex",
-                alignItems: "center",
-                gap: "18px",
-                flexWrap: "wrap",
+                display: "block",
+                padding: "8px",
+                background: "#ffffff",
+                borderRadius: "10px",
+                flexShrink: 0,
+                textDecoration: "none",
               }}
             >
-              <div
-                style={{
-                  padding: "8px",
-                  background: "#ffffff",
-                  borderRadius: "10px",
-                  flexShrink: 0,
-                }}
-              >
-                <Image
-                  src="/images/qr-code.jpg"
-                  alt="Neem Google Pay UPI QR Code"
-                  width={96}
-                  height={96}
-                  style={{ display: "block", borderRadius: "6px" }}
-                />
-              </div>
-              <div style={{ flex: 1, minWidth: "200px" }}>
-                <strong style={{ display: "block", color: "var(--coffee)", fontSize: "1.02rem" }}>
+              <Image
+                src={product.qrImage}
+                alt={`${product.name} Google Pay UPI QR Code - ₹${product.totalWithDelivery}`}
+                width={104}
+                height={104}
+                style={{ display: "block", borderRadius: "6px" }}
+              />
+            </a>
+            <div style={{ flex: 1, minWidth: "200px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                <strong style={{ color: "var(--coffee)", fontSize: "1.05rem" }}>
                   Pay via Google Pay / UPI
                 </strong>
-                <span style={{ fontSize: "0.84rem", color: "var(--mut)", display: "block", marginTop: "4px" }}>
-                  ₹99 + ₹30 flat delivery = <strong style={{ color: "var(--cream)" }}>₹129 total</strong>.
-                  Scan QR code with Google Pay / PhonePe &amp; tap &apos;Buy Now&apos; to complete your delivery details.
+                <span
+                  style={{
+                    background: "rgba(200, 149, 89, 0.2)",
+                    color: "var(--cream)",
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    padding: "2px 8px",
+                    borderRadius: "99px",
+                    border: "1px solid rgba(200, 149, 89, 0.4)",
+                  }}
+                >
+                  ₹{product.totalWithDelivery} Total
                 </span>
-                <div style={{ marginTop: "10px", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-                  <span style={{ fontSize: "0.78rem", color: "var(--mut)" }}>GPay / UPI Mobile:</span>
-                  <CopyMobileButton phone="8943019251" layout="badge" size="sm" />
-                </div>
+              </div>
+              <span style={{ fontSize: "0.84rem", color: "var(--mut)", display: "block", marginTop: "4px" }}>
+                {product.deliveryFee === 0 ? (
+                  <>
+                    ₹{product.price} (Free Doorstep Delivery) ={" "}
+                    <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
+                  </>
+                ) : (
+                  <>
+                    ₹{product.price} + ₹{product.deliveryFee} flat delivery ={" "}
+                    <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
+                  </>
+                )}{" "}
+                Scan QR or tap to open UPI app, then tap &apos;Buy Now&apos; to submit delivery details.
+              </span>
+              <div style={{ marginTop: "10px", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                <span style={{ fontSize: "0.78rem", color: "var(--mut)" }}>GPay / UPI Mobile:</span>
+                <CopyMobileButton phone="8943019251" layout="badge" size="sm" />
+                <a
+                  href={product.upiUrl}
+                  style={{
+                    fontSize: "0.78rem",
+                    color: "var(--coffee)",
+                    textDecoration: "underline",
+                    fontWeight: 600,
+                  }}
+                >
+                  Tap to Pay ₹{product.totalWithDelivery} &rarr;
+                </a>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
+
+      {/* If viewing Bottle + Refill, show the How to Refill video */}
+      {product.id === "refill" && (
+        <div style={{ marginTop: "clamp(32px, 4vw, 44px)" }}>
+          <RefillVideo />
+        </div>
+      )}
 
       {/* Other Pack Options */}
       <section style={{ marginTop: "clamp(32px, 4vw, 44px)" }}>

@@ -40,7 +40,7 @@ This project has been engineered specifically for **Maximum Search Engine Optimi
 ## 🛍️ Features & Functionality
 
 - **Delivery Pricing**:
-  - **4 Bottle Combo (₹389)**: **100% FREE Doorstep Delivery** (₹0 delivery charge).
+  - **4 Bottle Combo (₹389)**: **100% FREE Delivery** (₹0 delivery charge).
   - **Other Packs (Single, Duo, Refill)**: Flat ₹30 delivery fee automatically applied.
 - **UPI QR Code Payment**: The Single Bottle pack features an embedded Google Pay / UPI QR Code (`/images/qr-code.jpg`) for instant scan-and-pay.
 - **Direct "Buy Now" Checkout**: Streamlined instant order modal opening directly on any product click.

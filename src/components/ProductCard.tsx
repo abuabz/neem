@@ -23,15 +23,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         aria-label={`View details for ${product.name}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            aspectRatio: "3/4",
-            overflow: "hidden",
-            background: "#140e0a",
-          }}
-        >
+        <div className="pc-img">
           <Image
             src={product.image}
             alt={`${product.name} - Neem Premium Face Tissue Bottle`}

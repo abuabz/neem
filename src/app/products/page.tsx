@@ -105,7 +105,7 @@ export default function ProductsPage() {
               🎉 Free Delivery: 4 Bottle Family Pack (₹389)
             </strong>
             <span style={{ color: "var(--mut)", fontSize: "0.9rem" }}>
-              Get 4 bottles at ₹389 with 100% Free Doorstep Delivery across Kerala &amp; India!
+              Get 4 bottles at ₹389 with 100% Free Delivery across Kerala
             </span>
           </div>
           <Link href="/products/4-bottle-combo" className="btn">

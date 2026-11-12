@@ -161,7 +161,7 @@ export default function HomeHero() {
         <div>
           <b>Free delivery on the 4 bottle combo</b>
           <p style={{ margin: "4px 0 0", color: "var(--cream)", opacity: 0.9 }}>
-            Order in a minute on WhatsApp with 100% Free Doorstep Delivery.
+            Order in a minute on WhatsApp with 100% Free Delivery.
           </p>
         </div>
         <button
