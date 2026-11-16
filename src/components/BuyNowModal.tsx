@@ -173,10 +173,11 @@ export default function BuyNowModal() {
       ? "/images/389scanner.jpeg"
       : "/images/129scanner.jpeg";
 
-  const activeUpiUrl =
-    quantity === 1 && selectedProduct.upiUrl
-      ? selectedProduct.upiUrl
-      : `upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=${grandTotal}.00&cu=INR`;
+  const activeUpiUrl = `upi://pay?pa=neemfacetissue@okhdfcbank&pn=${encodeURIComponent(
+    "Neem Premium face tissue"
+  )}&am=${grandTotal}.00&cu=INR&tn=${encodeURIComponent(
+    `Neem - ${selectedProduct.name}`
+  )}`;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -465,13 +466,17 @@ export default function BuyNowModal() {
             .
           </p>
 
-          <div
+          <a
+            href={activeUpiUrl}
+            aria-label={`Pay ₹${grandTotal} with UPI`}
             style={{
               display: "inline-block",
               padding: "10px",
               background: "#ffffff",
               borderRadius: "12px",
               boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6)",
+              textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             <Image
@@ -482,12 +487,13 @@ export default function BuyNowModal() {
               priority
               style={{ display: "block", borderRadius: "8px" }}
             />
-          </div>
+          </a>
 
-          {/* Direct UPI App Choice (GPay, PhonePe, Paytm, Other) + Copy IDs */}
+          {/* Pay with UPI Button (opens all mobile UPI apps) + Copy IDs */}
           <UpiPaymentOptions
             amount={grandTotal}
             productName={selectedProduct.name}
+            upiUrl={activeUpiUrl}
             layout="modal"
           />
         </div>

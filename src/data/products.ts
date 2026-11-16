@@ -56,7 +56,7 @@ export const PRODUCTS: Product[] = [
     deliveryFee: 30,
     totalWithDelivery: 129,
     upiUrl:
-      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=129.00&cu=INR&aid=uGICAgNDjk8-FAw",
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=129.00&cu=INR&tn=Neem%20-%20Single%20Bottle",
   },
   {
     id: "duo",
@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
     deliveryFee: 30,
     totalWithDelivery: 219,
     upiUrl:
-      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=219.00&cu=INR&aid=uGICAgNDjk8-FAw",
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=219.00&cu=INR&tn=Neem%20-%20Duo%20Combo",
   },
   {
     id: "refill",
@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
     deliveryFee: 30,
     totalWithDelivery: 179,
     upiUrl:
-      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=179.00&cu=INR&aid=uGICAgNDjk8-FAw",
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=179.00&cu=INR&tn=Neem%20-%20Bottle%20plus%20Refill",
   },
   {
     id: "combo4",
@@ -155,7 +155,7 @@ export const PRODUCTS: Product[] = [
     deliveryFee: 0,
     totalWithDelivery: 389,
     upiUrl:
-      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=389.00&cu=INR&aid=uGICAgNDjk8-FAw",
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=389.00&cu=INR&tn=Neem%20-%204%20Bottle%20Combo",
   },
 ];
 

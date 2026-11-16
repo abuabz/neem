@@ -433,66 +433,64 @@ button:focus-visible {
   to { opacity: 1; }
 }
 
-/* UPI App Choice Buttons & Copy Row */
+/* UPI Pay with UPI Button & Copy Row */
 .upi-options-wrap {
   margin-top: 14px;
   width: 100%;
-}
-
-.upi-options-title {
-  font-size: 0.76rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--mut);
-  margin-bottom: 8px;
-  text-align: center;
-  font-weight: 600;
-}
-
-.upi-app-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.upi-app-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+}
+
+.upi-pay-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.upi-pay-now-btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 10px 6px;
+  gap: 8px;
+  width: 100%;
+  max-width: 290px;
+  padding: 12px 20px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(200, 149, 89, 0.3);
+  background: linear-gradient(135deg, #c89559 0%, #b88247 100%);
+  color: #0c0907;
+  font-size: 1rem;
+  font-weight: 700;
   text-decoration: none;
-  color: var(--cream);
-  font-size: 0.75rem;
-  font-weight: 600;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 18px rgba(200, 149, 89, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
   user-select: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
 }
 
-.upi-app-btn:hover,
-.upi-app-btn:active {
+.upi-pay-now-btn:hover,
+.upi-pay-now-btn:active {
   transform: translateY(-2px);
-  background: rgba(200, 149, 89, 0.15);
-  border-color: var(--coffee);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 22px rgba(200, 149, 89, 0.5);
+  color: #0c0907;
 }
 
-.upi-app-icon {
+.upi-pay-now-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  color: #0c0907;
 }
 
-.upi-app-label {
-  white-space: nowrap;
-  font-size: 0.75rem;
+.upi-pay-hint {
+  font-size: 0.76rem;
+  color: var(--mut);
+  text-align: center;
 }
 
 .upi-copy-row {
@@ -501,6 +499,7 @@ button:focus-visible {
   gap: 8px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .upi-copy-chip {
@@ -536,15 +535,40 @@ button:focus-visible {
   margin-left: 2px;
 }
 
-@media (max-width: 480px) {
-  .upi-app-buttons {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+/* Detail page alignment */
+.upi-options-detail {
+  align-items: flex-start;
+}
+.upi-options-detail .upi-pay-btn-wrap {
+  align-items: flex-start;
+}
+.upi-options-detail .upi-pay-hint {
+  text-align: left;
+}
+.upi-options-detail .upi-copy-row {
+  justify-content: flex-start;
+}
+
+@media (max-width: 600px) {
+  .upi-options-detail {
+    align-items: center;
   }
-  .upi-app-btn {
-    flex-direction: row;
-    gap: 8px;
-    padding: 8px 10px;
+  .upi-options-detail .upi-pay-btn-wrap {
+    align-items: center;
+  }
+  .upi-options-detail .upi-pay-hint {
+    text-align: center;
+  }
+  .upi-options-detail .upi-copy-row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .upi-pay-now-btn {
+    max-width: 100%;
+    padding: 13px 20px;
+    font-size: 1.02rem;
   }
   .upi-copy-row {
     flex-direction: column;

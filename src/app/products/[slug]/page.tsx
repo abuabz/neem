@@ -252,13 +252,17 @@ export default function ProductDetailPage({
               flexWrap: "wrap",
             }}
           >
-            <div
+            <a
+              href={product.upiUrl}
+              aria-label={`Pay ₹${product.totalWithDelivery} with UPI`}
               style={{
                 display: "block",
                 padding: "8px",
                 background: "#ffffff",
                 borderRadius: "10px",
                 flexShrink: 0,
+                textDecoration: "none",
+                cursor: "pointer",
               }}
             >
               <Image
@@ -268,7 +272,7 @@ export default function ProductDetailPage({
                 height={104}
                 style={{ display: "block", borderRadius: "6px" }}
               />
-            </div>
+            </a>
             <div style={{ flex: 1, minWidth: "200px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                 <strong style={{ color: "var(--coffee)", fontSize: "1.05rem" }}>
@@ -300,11 +304,12 @@ export default function ProductDetailPage({
                     <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
                   </>
                 )}{" "}
-                Scan QR or choose your UPI app below, then tap &apos;Buy Now&apos; to submit delivery details.
+                Scan QR or tap &apos;Pay with UPI&apos; below, then tap &apos;Buy Now&apos; to submit delivery details.
               </span>
               <UpiPaymentOptions
                 amount={product.totalWithDelivery}
                 productName={product.name}
+                upiUrl={product.upiUrl}
                 layout="detail"
               />
             </div>
