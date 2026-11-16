@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import RefillVideo from "@/components/RefillVideo";
 import AddToCartDetailButton from "./AddToCartDetailButton";
 import CopyMobileButton from "@/components/CopyMobileButton";
+import UpiPaymentOptions from "@/components/UpiPaymentOptions";
 
 export function generateStaticParams() {
   return PRODUCTS.map((product) => ({
@@ -251,18 +252,13 @@ export default function ProductDetailPage({
               flexWrap: "wrap",
             }}
           >
-            <a
-              href={product.upiUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Pay ₹${product.totalWithDelivery} for ${product.name} with Google Pay or UPI`}
+            <div
               style={{
                 display: "block",
                 padding: "8px",
                 background: "#ffffff",
                 borderRadius: "10px",
                 flexShrink: 0,
-                textDecoration: "none",
               }}
             >
               <Image
@@ -272,7 +268,7 @@ export default function ProductDetailPage({
                 height={104}
                 style={{ display: "block", borderRadius: "6px" }}
               />
-            </a>
+            </div>
             <div style={{ flex: 1, minWidth: "200px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                 <strong style={{ color: "var(--coffee)", fontSize: "1.05rem" }}>
@@ -304,23 +300,13 @@ export default function ProductDetailPage({
                     <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
                   </>
                 )}{" "}
-                Scan QR or tap to open UPI app, then tap &apos;Buy Now&apos; to submit delivery details.
+                Scan QR or choose your UPI app below, then tap &apos;Buy Now&apos; to submit delivery details.
               </span>
-              <div style={{ marginTop: "10px", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-                <span style={{ fontSize: "0.78rem", color: "var(--mut)" }}>GPay / UPI Mobile:</span>
-                <CopyMobileButton phone="8943019251" layout="badge" size="sm" />
-                <a
-                  href={product.upiUrl}
-                  style={{
-                    fontSize: "0.78rem",
-                    color: "var(--coffee)",
-                    textDecoration: "underline",
-                    fontWeight: 600,
-                  }}
-                >
-                  Tap to Pay ₹{product.totalWithDelivery} &rarr;
-                </a>
-              </div>
+              <UpiPaymentOptions
+                amount={product.totalWithDelivery}
+                productName={product.name}
+                layout="detail"
+              />
             </div>
           </div>
         </div>

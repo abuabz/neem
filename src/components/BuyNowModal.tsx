@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useCheckout, DeliveryDetails, STANDARD_DELIVERY_CHARGE } from "./CheckoutProvider";
 import CopyMobileButton from "./CopyMobileButton";
+import UpiPaymentOptions from "./UpiPaymentOptions";
 
 const INDIAN_STATES = [
   "Kerala",
@@ -464,18 +465,13 @@ export default function BuyNowModal() {
             .
           </p>
 
-          <a
-            href={activeUpiUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Pay ₹${grandTotal} for ${selectedProduct.name} with Google Pay or UPI`}
+          <div
             style={{
               display: "inline-block",
               padding: "10px",
               background: "#ffffff",
               borderRadius: "12px",
               boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6)",
-              textDecoration: "none",
             }}
           >
             <Image
@@ -486,35 +482,14 @@ export default function BuyNowModal() {
               priority
               style={{ display: "block", borderRadius: "8px" }}
             />
-          </a>
-
-          {/* Copy Mobile Number & Tap to Pay for GPay / UPI */}
-          <div
-            style={{
-              marginTop: "14px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <span style={{ fontSize: "0.82rem", color: "var(--mut)" }}>
-              Or pay directly using Google Pay / PhonePe Mobile Number:
-            </span>
-            <CopyMobileButton phone="8943019251" layout="badge" size="md" />
-            <a
-              href={activeUpiUrl}
-              style={{
-                fontSize: "0.82rem",
-                color: "var(--coffee)",
-                textDecoration: "underline",
-                fontWeight: 600,
-                marginTop: "2px",
-              }}
-            >
-              Tap here to Pay ₹{grandTotal} on Mobile &rarr;
-            </a>
           </div>
+
+          {/* Direct UPI App Choice (GPay, PhonePe, Paytm, Other) + Copy IDs */}
+          <UpiPaymentOptions
+            amount={grandTotal}
+            productName={selectedProduct.name}
+            layout="modal"
+          />
         </div>
 
         {/* Delivery Details Form */}

@@ -433,6 +433,129 @@ button:focus-visible {
   to { opacity: 1; }
 }
 
+/* UPI App Choice Buttons & Copy Row */
+.upi-options-wrap {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.upi-options-title {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mut);
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.upi-app-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.upi-app-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 6px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(200, 149, 89, 0.3);
+  text-decoration: none;
+  color: var(--cream);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+}
+
+.upi-app-btn:hover,
+.upi-app-btn:active {
+  transform: translateY(-2px);
+  background: rgba(200, 149, 89, 0.15);
+  border-color: var(--coffee);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.upi-app-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.upi-app-label {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+.upi-copy-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.upi-copy-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 149, 89, 0.25);
+  color: var(--cream);
+  font-size: 0.76rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.upi-copy-chip:hover {
+  background: rgba(200, 149, 89, 0.14);
+  border-color: var(--coffee);
+  transform: scale(1.02);
+}
+
+.upi-copy-muted {
+  color: var(--mut);
+  font-size: 0.72rem;
+}
+
+.upi-copy-action {
+  color: var(--coffee);
+  font-weight: 700;
+  font-size: 0.74rem;
+  margin-left: 2px;
+}
+
+@media (max-width: 480px) {
+  .upi-app-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .upi-app-btn {
+    flex-direction: row;
+    gap: 8px;
+    padding: 8px 10px;
+  }
+  .upi-copy-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  .upi-copy-chip {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
 .sheet {
   width: 100%;
   max-width: 520px;
