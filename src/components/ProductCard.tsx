@@ -43,7 +43,14 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           <h3>{product.name}</h3>
         </Link>
         <small>{product.shortDesc}</small>
-        <div className="pr">₹{product.price}</div>
+        <div className="pr">
+          ₹{product.price}
+          {product.id === "refill-pack" && (
+            <span style={{ fontSize: "0.78rem", color: "var(--mut)", fontWeight: 400, marginLeft: "4px" }}>
+              / 2 packs
+            </span>
+          )}
+        </div>
         <button
           className="btn"
           type="button"

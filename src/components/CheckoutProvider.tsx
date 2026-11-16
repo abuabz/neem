@@ -35,9 +35,10 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantityState] = useState<number>(1);
 
-  const openCheckout = (product: Product, initialQty = 1) => {
+  const openCheckout = (product: Product, initialQty?: number) => {
     setSelectedProduct(product);
-    setQuantityState(Math.max(1, initialQty));
+    const minQty = product.minQuantity || 1;
+    setQuantityState(Math.max(minQty, initialQty ?? minQty));
     setIsCheckoutOpen(true);
   };
 
@@ -46,7 +47,8 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   };
 
   const setQuantity = (qty: number) => {
-    setQuantityState(Math.max(1, qty));
+    const minQty = selectedProduct?.minQuantity || 1;
+    setQuantityState(Math.max(minQty, qty));
   };
 
   const incrementQuantity = () => {
@@ -54,7 +56,10 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   };
 
   const decrementQuantity = () => {
-    setQuantityState((prev) => Math.max(1, prev - 1));
+    setQuantityState((prev) => {
+      const minQty = selectedProduct?.minQuantity || 1;
+      return Math.max(minQty, prev - 1);
+    });
   };
 
   const submitOrder = (details: DeliveryDetails) => {
@@ -67,20 +72,31 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
       // Ignore storage errors
     }
 
-    const itemSubtotal = selectedProduct.price * quantity;
-    const isFreeDelivery = selectedProduct.id === "combo4" || selectedProduct.price === 389;
-    const deliveryFee = isFreeDelivery ? 0 : STANDARD_DELIVERY_CHARGE;
+    const isRefillPack = selectedProduct.id === "refill-pack";
+    const itemSubtotal = isRefillPack
+      ? (quantity <= 2 ? 119 : 119 + (quantity - 2) * (selectedProduct.additionalUnitPrice || 60))
+      : selectedProduct.price * quantity;
+
+    const deliveryFee =
+      selectedProduct.deliveryFee !== undefined
+        ? selectedProduct.deliveryFee
+        : (selectedProduct.id === "combo4" || selectedProduct.price === 389 ? 0 : STANDARD_DELIVERY_CHARGE);
+
     const grandTotal = itemSubtotal + deliveryFee;
     const cleanPhone = siteConfig.phone.replace(/[^0-9]/g, "");
 
     const deliveryText =
       deliveryFee === 0 ? "FREE (Complimentary)" : `₹${deliveryFee}`;
 
+    const qtyText = isRefillPack
+      ? `${quantity} Packs (${quantity === 2 ? "2 Packs Min. Order" : `2 Packs + ${quantity - 2} Extra`})`
+      : `${quantity} ${quantity === 1 ? "Pack" : "Packs"}`;
+
     const text =
       `🛍️ *NEW ORDER - NEEM FACE TISSUE*\n` +
       `─────────────────────────\n` +
       `*Product:* ${selectedProduct.name}\n` +
-      `*Quantity:* ${quantity}\n` +
+      `*Quantity:* ${qtyText}\n` +
       `*Items Subtotal:* ₹${itemSubtotal}\n` +
       `*Delivery Charge:* ${deliveryText}\n` +
       `*Total Amount:* ₹${grandTotal}\n\n` +

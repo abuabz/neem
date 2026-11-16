@@ -15,7 +15,7 @@ export default function AddToCartDetailButton({ product }: { product: Product })
         style={{ minWidth: "220px", minHeight: "48px", fontSize: "1.05rem" }}
         onClick={() => openCheckout(product)}
       >
-        Buy Now (₹{product.price})
+        Buy Now (₹{product.price}{product.id === "refill-pack" ? " / 2 Packs" : ""})
       </button>
     </div>
   );

@@ -193,6 +193,11 @@ export default function ProductDetailPage({
               }}
             >
               ₹{product.price}
+              {product.id === "refill-pack" && (
+                <span style={{ fontSize: "1rem", color: "var(--mut)", fontWeight: 400, marginLeft: "8px" }}>
+                  (for 2 packs)
+                </span>
+              )}
             </div>
             <span style={{ color: "var(--mut)", fontSize: "0.9rem" }}>
               ({product.pulls} pulls / {product.sheets} sheets)
@@ -238,7 +243,7 @@ export default function ProductDetailPage({
 
           <AddToCartDetailButton product={product} />
 
-          {/* Quick Pay QR Code Badge for Every Product */}
+          {/* Quick Pay Box for Every Product */}
           <div
             style={{
               marginTop: "24px",
@@ -252,27 +257,29 @@ export default function ProductDetailPage({
               flexWrap: "wrap",
             }}
           >
-            <a
-              href={product.upiUrl}
-              aria-label={`Pay ₹${product.totalWithDelivery} with UPI`}
-              style={{
-                display: "block",
-                padding: "8px",
-                background: "#ffffff",
-                borderRadius: "10px",
-                flexShrink: 0,
-                textDecoration: "none",
-                cursor: "pointer",
-              }}
-            >
-              <Image
-                src={product.qrImage}
-                alt={`${product.name} Google Pay UPI QR Code - ₹${product.totalWithDelivery}`}
-                width={104}
-                height={104}
-                style={{ display: "block", borderRadius: "6px" }}
-              />
-            </a>
+            {product.hasScanner !== false && product.qrImage && (
+              <a
+                href={product.upiUrl}
+                aria-label={`Pay ₹${product.totalWithDelivery} with UPI`}
+                style={{
+                  display: "block",
+                  padding: "8px",
+                  background: "#ffffff",
+                  borderRadius: "10px",
+                  flexShrink: 0,
+                  textDecoration: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <Image
+                  src={product.qrImage}
+                  alt={`${product.name} Google Pay UPI QR Code - ₹${product.totalWithDelivery}`}
+                  width={104}
+                  height={104}
+                  style={{ display: "block", borderRadius: "6px" }}
+                />
+              </a>
+            )}
             <div style={{ flex: 1, minWidth: "200px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                 <strong style={{ color: "var(--coffee)", fontSize: "1.05rem" }}>
@@ -293,18 +300,25 @@ export default function ProductDetailPage({
                 </span>
               </div>
               <span style={{ fontSize: "0.84rem", color: "var(--mut)", display: "block", marginTop: "4px" }}>
-                {product.deliveryFee === 0 ? (
+                {product.id === "refill-pack" ? (
+                  <>
+                    ₹{product.price} (2 packs min. order) + ₹{product.deliveryFee} delivery ={" "}
+                    <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
+                    Each additional pack is just +₹60. Tap &apos;Buy Now&apos; to adjust quantity or tap &apos;Pay with UPI&apos; below.
+                  </>
+                ) : product.deliveryFee === 0 ? (
                   <>
                     ₹{product.price} (Free Doorstep Delivery) ={" "}
                     <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
+                    Scan QR or tap &apos;Pay with UPI&apos; below, then tap &apos;Buy Now&apos; to submit delivery details.
                   </>
                 ) : (
                   <>
                     ₹{product.price} + ₹{product.deliveryFee} flat delivery ={" "}
                     <strong style={{ color: "var(--cream)" }}>₹{product.totalWithDelivery} total</strong>.
+                    Scan QR or tap &apos;Pay with UPI&apos; below, then tap &apos;Buy Now&apos; to submit delivery details.
                   </>
-                )}{" "}
-                Scan QR or tap &apos;Pay with UPI&apos; below, then tap &apos;Buy Now&apos; to submit delivery details.
+                )}
               </span>
               <UpiPaymentOptions
                 amount={product.totalWithDelivery}
@@ -317,8 +331,8 @@ export default function ProductDetailPage({
         </div>
       </section>
 
-      {/* If viewing Bottle + Refill, show the How to Refill video */}
-      {product.id === "refill" && (
+      {/* If viewing Bottle + Refill or Refill 2 Pack, show the How to Refill video */}
+      {(product.id === "refill" || product.id === "refill-pack") && (
         <div style={{ marginTop: "clamp(32px, 4vw, 44px)" }}>
           <RefillVideo />
         </div>

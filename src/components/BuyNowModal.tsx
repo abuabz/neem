@@ -154,9 +154,18 @@ export default function BuyNowModal() {
 
   if (!isCheckoutOpen || !selectedProduct) return null;
 
-  const itemSubtotal = selectedProduct.price * quantity;
-  const isFreeDelivery = selectedProduct.id === "combo4" || selectedProduct.price === 389;
-  const deliveryCharge = isFreeDelivery ? 0 : STANDARD_DELIVERY_CHARGE;
+  const isRefillPack = selectedProduct.id === "refill-pack";
+  const minQty = selectedProduct.minQuantity || 1;
+
+  const itemSubtotal = isRefillPack
+    ? (quantity <= 2 ? 119 : 119 + (quantity - 2) * (selectedProduct.additionalUnitPrice || 60))
+    : selectedProduct.price * quantity;
+
+  const deliveryCharge =
+    selectedProduct.deliveryFee !== undefined
+      ? selectedProduct.deliveryFee
+      : (selectedProduct.id === "combo4" || selectedProduct.price === 389 ? 0 : STANDARD_DELIVERY_CHARGE);
+
   const grandTotal = itemSubtotal + deliveryCharge;
 
   // Active QR code image and UPI link based on the selected product
@@ -171,12 +180,12 @@ export default function BuyNowModal() {
       ? "/images/179scanner.jpeg"
       : selectedProduct.id === "combo4"
       ? "/images/389scanner.jpeg"
-      : "/images/129scanner.jpeg";
+      : selectedProduct.qrImage || "/images/129scanner.jpeg";
 
   const activeUpiUrl = `upi://pay?pa=neemfacetissue@okhdfcbank&pn=${encodeURIComponent(
     "Neem Premium face tissue"
   )}&am=${grandTotal}.00&cu=INR&tn=${encodeURIComponent(
-    `Neem - ${selectedProduct.name}`
+    `Neem - ${selectedProduct.name} (${quantity} ${isRefillPack ? "packs" : "qty"})`
   )}`;
 
   const handleChange = (
@@ -334,7 +343,9 @@ export default function BuyNowModal() {
               {selectedProduct.name}
             </strong>
             <span style={{ fontSize: "0.82rem", color: "var(--mut)" }}>
-              ₹{selectedProduct.price} per pack
+              {isRefillPack
+                ? "₹119 for 2 packs (min. order) • +₹60/extra pack"
+                : `₹${selectedProduct.price} per pack`}
             </span>
           </div>
 
@@ -343,7 +354,7 @@ export default function BuyNowModal() {
             <button
               type="button"
               onClick={decrementQuantity}
-              disabled={quantity <= 1}
+              disabled={quantity <= minQty}
               aria-label="Decrease quantity"
               style={{
                 width: "32px",
@@ -353,8 +364,8 @@ export default function BuyNowModal() {
                 background: "none",
                 color: "var(--coffee)",
                 fontSize: "1.2rem",
-                cursor: quantity <= 1 ? "not-allowed" : "pointer",
-                opacity: quantity <= 1 ? 0.4 : 1,
+                cursor: quantity <= minQty ? "not-allowed" : "pointer",
+                opacity: quantity <= minQty ? 0.4 : 1,
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -362,9 +373,16 @@ export default function BuyNowModal() {
             >
               −
             </button>
-            <b style={{ minWidth: "22px", textAlign: "center", color: "var(--cream)" }}>
-              {quantity}
-            </b>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: "30px" }}>
+              <b style={{ textAlign: "center", color: "var(--cream)" }}>
+                {quantity}
+              </b>
+              {isRefillPack && (
+                <span style={{ fontSize: "0.68rem", color: "var(--mut)", whiteSpace: "nowrap" }}>
+                  packs
+                </span>
+              )}
+            </div>
             <button
               type="button"
               onClick={incrementQuantity}
@@ -399,12 +417,16 @@ export default function BuyNowModal() {
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "var(--mut)", marginBottom: "4px" }}>
-            <span>Items Subtotal ({quantity} {quantity === 1 ? "pack" : "packs"}):</span>
+            <span>
+              {isRefillPack
+                ? `Items Subtotal (${quantity} packs${quantity === 2 ? " - Min. Order" : ""}):`
+                : `Items Subtotal (${quantity} ${quantity === 1 ? "pack" : "packs"}):`}
+            </span>
             <span style={{ color: "var(--cream)" }}>₹{itemSubtotal}</span>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "var(--mut)", marginBottom: "8px" }}>
             <span>Delivery Charge:</span>
-            {isFreeDelivery ? (
+            {deliveryCharge === 0 ? (
               <span style={{ color: "#7cd97c", fontWeight: 700 }}>FREE (₹0)</span>
             ) : (
               <span style={{ color: "var(--coffee)", fontWeight: 600 }}>+ ₹{deliveryCharge}</span>
@@ -432,7 +454,7 @@ export default function BuyNowModal() {
           </div>
         </div>
 
-        {/* UPI QR Code Payment Box for Every Product */}
+        {/* UPI Payment Box for Every Product */}
         <div
           style={{
             padding: "16px",
@@ -453,41 +475,56 @@ export default function BuyNowModal() {
               marginBottom: "4px",
             }}
           >
-            Pay via Google Pay / UPI QR
+            {selectedProduct.hasScanner === false
+              ? "Pay via Google Pay / UPI"
+              : "Pay via Google Pay / UPI QR"}
           </div>
           <p style={{ margin: "0 auto 12px", fontSize: "0.86rem", color: "var(--cream)", maxWidth: "44ch" }}>
-            Scan this QR code using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong> to pay{" "}
-            <strong style={{ color: "var(--coffee)", fontSize: "1rem" }}>₹{grandTotal}</strong>{" "}
-            {deliveryCharge === 0 ? (
-              "(Free Delivery)"
+            {selectedProduct.hasScanner === false ? (
+              <>
+                Tap <strong>Pay with UPI</strong> below to pay{" "}
+                <strong style={{ color: "var(--coffee)", fontSize: "1rem" }}>₹{grandTotal}</strong>{" "}
+                (₹{itemSubtotal} + ₹{deliveryCharge} delivery) using any UPI app on your phone.
+              </>
             ) : (
-              <>(₹{itemSubtotal} + ₹{deliveryCharge} delivery)</>
+              <>
+                Scan this QR code using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong> to pay{" "}
+                <strong style={{ color: "var(--coffee)", fontSize: "1rem" }}>₹{grandTotal}</strong>{" "}
+                {deliveryCharge === 0 ? (
+                  "(Free Delivery)"
+                ) : (
+                  <>(₹{itemSubtotal} + ₹{deliveryCharge} delivery)</>
+                )}
+                .
+              </>
             )}
-            .
           </p>
 
-          <a
-            href={activeUpiUrl}
-            aria-label={`Pay ₹${grandTotal} with UPI`}
-            style={{
-              display: "inline-block",
-              padding: "10px",
-              background: "#ffffff",
-              borderRadius: "12px",
-              boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6)",
-              textDecoration: "none",
-              cursor: "pointer",
-            }}
-          >
-            <Image
-              src={activeQrImage}
-              alt={`Neem ${selectedProduct.name} Google Pay UPI QR Code - ₹${grandTotal}`}
-              width={170}
-              height={170}
-              priority
-              style={{ display: "block", borderRadius: "8px" }}
-            />
-          </a>
+          {selectedProduct.hasScanner !== false && activeQrImage && (
+            <a
+              href={activeUpiUrl}
+              aria-label={`Pay ₹${grandTotal} with UPI`}
+              style={{
+                display: "inline-block",
+                padding: "10px",
+                background: "#ffffff",
+                borderRadius: "12px",
+                boxShadow: "0 6px 20px rgba(0, 0, 0, 0.6)",
+                textDecoration: "none",
+                cursor: "pointer",
+                marginBottom: "8px",
+              }}
+            >
+              <Image
+                src={activeQrImage}
+                alt={`Neem ${selectedProduct.name} Google Pay UPI QR Code - ₹${grandTotal}`}
+                width={170}
+                height={170}
+                priority
+                style={{ display: "block", borderRadius: "8px" }}
+              />
+            </a>
+          )}
 
           {/* Pay with UPI Button (opens all mobile UPI apps) + Copy IDs */}
           <UpiPaymentOptions

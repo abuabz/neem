@@ -22,6 +22,9 @@ export interface Product {
   deliveryFee: number;
   totalWithDelivery: number;
   upiUrl: string;
+  minQuantity?: number;
+  additionalUnitPrice?: number;
+  hasScanner?: boolean;
 }
 
 export const PRODUCTS: Product[] = [
@@ -123,6 +126,42 @@ export const PRODUCTS: Product[] = [
     totalWithDelivery: 179,
     upiUrl:
       "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=179.00&cu=INR&tn=Neem%20-%20Bottle%20plus%20Refill",
+  },
+  {
+    id: "refill-pack",
+    slug: "refill-pack",
+    name: "Refill 2 Pack",
+    headline: "2 Refill Packs (Minimum Order)",
+    price: 119,
+    currency: "INR",
+    shortDesc: "2 packs (min. order) • +₹60/extra pack",
+    fullDesc:
+      "Genuine Neem facial tissue refill packs designed specifically for reloading your Neem cylinder bottles. Contains 120 pulls (240 sheets of 2-ply ultra-soft tissue across 2 packs). Minimum order is 2 packs (₹119 + ₹20 flat delivery), with each additional pack available for just ₹60.",
+    image: "/images/refill.jpeg",
+    imageWidth: 1218,
+    imageHeight: 1292,
+    tag: "Refill Pack",
+    features: [
+      "2 Refill Packs (120 pulls / 240 2-ply ultra soft sheets)",
+      "Minimum order 2 packs (₹119 + ₹20 flat delivery)",
+      "Easily add more packs for just ₹60 each",
+      "Designed specifically to reload Neem cylinder bottles",
+      "Eco-conscious choice reducing container waste",
+    ],
+    inStock: true,
+    sku: "NEEM-RF-02",
+    pulls: 120,
+    sheets: 240,
+    ratingValue: 5.0,
+    reviewCount: 64,
+    qrImage: "",
+    deliveryFee: 20,
+    totalWithDelivery: 139,
+    upiUrl:
+      "upi://pay?pa=neemfacetissue@okhdfcbank&pn=Neem%20Premium%20face%20tissue&am=139.00&cu=INR&tn=Neem%20-%20Refill%202%20Pack",
+    minQuantity: 2,
+    additionalUnitPrice: 60,
+    hasScanner: false,
   },
   {
     id: "combo4",
