@@ -82,6 +82,17 @@ export default function BuyNowModal() {
   const [districtList, setDistrictList] = useState<string[]>(DEFAULT_DISTRICTS);
   const [customPostMode, setCustomPostMode] = useState(false);
   const [customDistrictMode, setCustomDistrictMode] = useState(false);
+  const [isIos, setIsIos] = useState(false);
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      const ua = navigator.userAgent || "";
+      setIsIos(
+        /iPad|iPhone|iPod/.test(ua) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+      );
+    }
+  }, []);
 
   // Load saved delivery profile from localStorage
   useEffect(() => {
@@ -182,11 +193,17 @@ export default function BuyNowModal() {
       ? "/images/389scanner.jpeg"
       : selectedProduct.qrImage || "/images/129scanner.jpeg";
 
-  const activeUpiUrl = `upi://pay?pa=neemfacetissue@okhdfcbank&pn=${encodeURIComponent(
-    "Neem Premium face tissue"
-  )}&am=${grandTotal}.00&cu=INR&tn=${encodeURIComponent(
-    `Neem - ${selectedProduct.name} (${quantity} ${isRefillPack ? "packs" : "qty"})`
-  )}`;
+  const activeUpiUrl = isIos
+    ? `tez://upi/pay?pa=neemfacetissue@okhdfcbank&pn=${encodeURIComponent(
+        "Neem Premium face tissue"
+      )}&am=${grandTotal}.00&cu=INR&tn=${encodeURIComponent(
+        `Neem - ${selectedProduct.name} (${quantity} ${isRefillPack ? "packs" : "qty"})`
+      )}`
+    : `upi://pay?pa=neemfacetissue@okhdfcbank&pn=${encodeURIComponent(
+        "Neem Premium face tissue"
+      )}&am=${grandTotal}.00&cu=INR&tn=${encodeURIComponent(
+        `Neem - ${selectedProduct.name} (${quantity} ${isRefillPack ? "packs" : "qty"})`
+      )}`;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>

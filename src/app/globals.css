@@ -535,6 +535,48 @@ button:focus-visible {
   margin-left: 2px;
 }
 
+/* iOS alternate app buttons (PhonePe, Paytm) */
+.upi-ios-alternatives {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.upi-ios-alt-label {
+  font-size: 0.72rem;
+  color: var(--mut);
+}
+
+.upi-ios-alt-btns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.upi-ios-alt-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(200, 149, 89, 0.28);
+  color: var(--cream);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.upi-ios-alt-btn:hover,
+.upi-ios-alt-btn:active {
+  background: rgba(200, 149, 89, 0.18);
+  border-color: var(--coffee);
+  transform: translateY(-1px);
+  color: var(--cream);
+}
+
 /* Detail page alignment */
 .upi-options-detail {
   align-items: flex-start;
@@ -544,6 +586,9 @@ button:focus-visible {
 }
 .upi-options-detail .upi-pay-hint {
   text-align: left;
+}
+.upi-options-detail .upi-ios-alternatives {
+  align-items: flex-start;
 }
 .upi-options-detail .upi-copy-row {
   justify-content: flex-start;
@@ -558,6 +603,9 @@ button:focus-visible {
   }
   .upi-options-detail .upi-pay-hint {
     text-align: center;
+  }
+  .upi-options-detail .upi-ios-alternatives {
+    align-items: center;
   }
   .upi-options-detail .upi-copy-row {
     justify-content: center;

@@ -9,6 +9,7 @@ import RefillVideo from "@/components/RefillVideo";
 import AddToCartDetailButton from "./AddToCartDetailButton";
 import CopyMobileButton from "@/components/CopyMobileButton";
 import UpiPaymentOptions from "@/components/UpiPaymentOptions";
+import ProductQrLink from "@/components/ProductQrLink";
 
 export function generateStaticParams() {
   return PRODUCTS.map((product) => ({
@@ -258,27 +259,11 @@ export default function ProductDetailPage({
             }}
           >
             {product.hasScanner !== false && product.qrImage && (
-              <a
-                href={product.upiUrl}
-                aria-label={`Pay ₹${product.totalWithDelivery} with UPI`}
-                style={{
-                  display: "block",
-                  padding: "8px",
-                  background: "#ffffff",
-                  borderRadius: "10px",
-                  flexShrink: 0,
-                  textDecoration: "none",
-                  cursor: "pointer",
-                }}
-              >
-                <Image
-                  src={product.qrImage}
-                  alt={`${product.name} Google Pay UPI QR Code - ₹${product.totalWithDelivery}`}
-                  width={104}
-                  height={104}
-                  style={{ display: "block", borderRadius: "6px" }}
-                />
-              </a>
+              <ProductQrLink
+                qrImage={product.qrImage}
+                productName={product.name}
+                totalWithDelivery={product.totalWithDelivery}
+              />
             )}
             <div style={{ flex: 1, minWidth: "200px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
